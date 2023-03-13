@@ -1,0 +1,6 @@
+models/
+airflow/
+plugins/
+.vscode/
+__pycache__/
+src/__pycache__/
