@@ -1,4 +1,5 @@
-models/
+models/checkpoints
+models/best_model
 airflow/
 plugins/
 .vscode/
