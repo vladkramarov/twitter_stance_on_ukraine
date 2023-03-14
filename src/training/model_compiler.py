@@ -39,6 +39,3 @@ def compile_model():
     adam = Adam()
     model.compile(optimizer=adam, loss=tf.keras.losses.CategoricalCrossentropy(from_logits=False), metrics=['accuracy'])
     return model
-
-model = compile_model()
-model.summary()

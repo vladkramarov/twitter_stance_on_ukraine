@@ -19,8 +19,10 @@ test_ids, test_attention, test_labels = pp.prepare_training_data(ut.load_data(co
 
 def train_and_evaluate() -> Tuple[ct.Classifier, ct.Evaluator]: 
   '''A pipeline that 
-          1.Compiles a model'''
-
+          1.Uses compile_model function to compile a model
+          2.Creates a Classifier class
+          3.Trains and evaluates the model
+          4.Writes the results to tensorboard'''
   classifier = ct.Classifier(mc.compile_model(), 'transformer_conv_3_maxpool_conv5_maxpool_global_max',
   [train_ids, train_attention, train_labels],
   [valid_ids, valid_attention, valid_labels])
