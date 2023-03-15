@@ -17,7 +17,7 @@ def render_dash_chart():
                      'cumulative_ratios': 'Cumulative Stance Ratio'}
     app.layout = html.Div([
         html.H1('Twitter\'s stance towards Ukraine'),
-        html.H3(f'Data as of: {chart_data.created_at.max()}'),
+        html.H3(f'Data is gathered starting on {chart_data.created_at.min()} and until {chart_data.created_at.max()}'),
         html.Div([
         html.H3('Search by Keyword', style={'text-align': 'center'}),
         dcc.Input(id = 'keyword_input', placeholder = 'Enter a keyword here and press Enter', value ='', type = 'text', debounce=True, n_submit=True,
