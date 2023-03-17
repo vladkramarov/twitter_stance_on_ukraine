@@ -1,6 +1,6 @@
 import pandas as pd
 from transformers import DistilBertTokenizer
-import src.preprocessor as pp
+import src.preprocessor.preprocessor_funcs as pf
 import tensorflow as tf
 from tensorflow.keras.optimizers.legacy import Adam
 import numpy as np
@@ -98,7 +98,7 @@ class Evaluator:
         self.predicted_labels = predicted_labels
 
     def classify_sanity_check_dataset(self):
-        sanity_ids, sanity_attention = pp.distilbert_tokenizer(self.sanity_dataset, 'text')
+        sanity_ids, sanity_attention = pf.distilbert_tokenizer(self.sanity_dataset, 'text')
         sanity_predicted_labels = self.trained_classifier.predict([sanity_ids, sanity_attention])
         self.sanity_predicted_labels = sanity_predicted_labels
     
@@ -124,3 +124,4 @@ class Evaluator:
             tf.summary.scalar('test_f1', self.test_f1_score, step = 1)
             tf.summary.scalar('sanity_accuracy', self.sanity_test_accuracy, step=1)
             tf.summary.scalar('sanity_f1', self.sanity_test_f1_score, step = 1)
+    

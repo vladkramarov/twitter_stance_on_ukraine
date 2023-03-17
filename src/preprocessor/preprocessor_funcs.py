@@ -23,12 +23,6 @@ def clean_tweets(tweet: str) -> str:
     tweet = re.sub(r'\bhttps?\.+\b', '', tweet)
     return tweet
 
-def drop_short_tweets(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN) -> pd.DataFrame:
-    '''Removes tweets that are shorter than the minimum tweet length words'''
-    tweet_length = dataset[text_feature].apply(lambda row: len(str(row).split()))
-    dataset.loc[tweet_length > MIN_TWEET_LENGTH]
-    return dataset
-
 def replace_flag_emojis(tweet: str) -> str:
     '''Replaces Ukrainian and russian flags with country names'''
     ukrainian_flag = "🇺🇦"
@@ -42,6 +36,12 @@ def remove_emojis(tweet: str) -> str:
     ascii_characters_only = [word.encode('ascii', 'ignore').decode('ascii') for word in tweet.split()]
     return " ".join(ascii_characters_only).strip()
 
+def drop_short_tweets(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN) -> pd.DataFrame:
+    '''Removes tweets that are shorter than the minimum tweet length words'''
+    tweet_length = dataset[text_feature].apply(lambda row: len(str(row).split()))
+    dataset.loc[tweet_length > MIN_TWEET_LENGTH]
+    return dataset
+
 def distilbert_tokenizer(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN) -> Tuple[np.ndarray, np.ndarray]:
     '''Applies distilbert tokenizer on the text column. Returns input ids and attention masks'''
     checkpoint = 'distilbert-base-uncased'
@@ -49,19 +49,5 @@ def distilbert_tokenizer(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN)
     encoded = dict(tokenizer(dataset[text_feature].to_list(), return_tensors = 'np', padding='max_length', truncation=True, max_length = core.MAX_LENGTH))
     input_ids, attention_mask = encoded['input_ids'], encoded['attention_mask']
     return input_ids, attention_mask
-
-def preprocess_pipeline(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN):
-    '''A pipeline of preprocessing and tokenizing functions'''
-    dataset[text_feature] = dataset[text_feature].apply(clean_tweets).apply(replace_flag_emojis).apply(remove_emojis)
-    dataset = drop_short_tweets(dataset, text_feature)
-    input_ids, attention_mask = distilbert_tokenizer(dataset, text_feature)
-    return dataset, input_ids, attention_mask
-
-def prepare_training_data(dataset: pd.DataFrame, label_feature: str = LABEL_COLUMN):
-    dataset, input_ids, attention_mask = preprocess_pipeline(dataset)
-    one_hot_encoded_labels = keras.utils.to_categorical(dataset[label_feature])
-    return input_ids, attention_mask, one_hot_encoded_labels
-
-
 
 

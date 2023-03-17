@@ -1,4 +1,3 @@
-import src.preprocessor as pp
 import tensorflow as tf
 from keras import Model
 from tensorflow.keras.optimizers.legacy import Adam
@@ -6,17 +5,12 @@ from keras.layers import Conv1D, MaxPooling1D, LSTM, Bidirectional, GlobalMaxPoo
 import src.core as core
 import src.training.class_train
 import importlib
-from dataclasses import dataclass
 importlib.reload(core)
 importlib.reload(src.training.class_train)
-importlib.reload(pp)
 from transformers import TFDistilBertModel
-
 
 checkpoint = 'distilbert-base-uncased'
 distilbert = TFDistilBertModel.from_pretrained(checkpoint)
-
-
 
 def compile_model():
     '''Defines and compiles a model'''
@@ -28,7 +22,6 @@ def compile_model():
     max_pool_3 = MaxPooling1D(3)(conv_3)
     X = Conv1D(128, kernel_size = 5, activation='relu', padding='same')(max_pool_3)
     X = MaxPooling1D(3)(X)
-    # X = Concatenate()([max_pool_3, max_pool_5])
     X = GlobalMaxPooling1D()(X)
     X = Dense(128, activation='relu')(X)
     output = Dense(3, activation='softmax')(X)

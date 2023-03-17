@@ -3,9 +3,9 @@ import numpy as np
 from transformers import TFDistilBertModel
 import tensorflow as tf
 import src.database_manager as dm
-import src.daily_tweets_obtainer as dto
+import src.daily_predictions.daily_tweets_obtainer as dto
 from tensorflow.keras.models import load_model
-import src.preprocessor as pp
+import src.preprocessor.preprocessor_pipelines as pp
 import src.core as core
 import importlib
 importlib.reload(dto)
@@ -33,6 +33,6 @@ def daily_tweets_classification_pipeline():
     new_tweets_with_labels = classify_daily_tweets(new_tweets, input_ids, attention_masks)
     dm.write_to_db(new_tweets_with_labels)
     
-g = daily_tweets_classification_pipeline()
+daily_tweets_classification_pipeline()
 
 
