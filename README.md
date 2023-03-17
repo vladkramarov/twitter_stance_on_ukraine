@@ -2,14 +2,26 @@
 
 # 1. Running the code
 - Install Python 3.10.0 or above
-- Install packages shows in the requirements file
+- Install packages shows in the requirements file (tensorflow-macos is used because the code was written on a MacBook)
 
-# 2. Data for Training, Testing and Validating
+
+# 2. Training Data
 - Data for training, validating, and testing is located in the [dataset](dataset) folder
-- Snscrape was used to gather the data
+- Code for collecting and labeling training data can be found in ... (soon to be added)
+- Tweets were collected using the following 3 methods:
+        - Search by user:
+            - E.g. since Donald Trump Junior only critisizes all the help given to Ukraine, his tweets that mention Ukraine are automatically labeled as negative
+            - Likewise, tweets by Timothy Snyder that mention Ukraine are automatically labeled as positive
+            - Tweets from neutral news channels (e.g. AP News, Reuters) that mention Ukraine are automatically labeled as neutral
+        - Search by keywords:
+            - Combinations of keywords that will most likely end up in a *positive* tweet towards Ukraine. E.g. - "ukraine will win", "putin is a terrorist", etc.
+            - Combinations of keywords that will most likely end up in a *negative* tweet towards Ukraine. E.g. - "puppet government in ukraine", "azov neo-nazi", etc.
+        - Search by hashtags:
+            - Similar to a keyword search. Used hashtags that would most likely end up in a strongly positive/strongly negative tweet.
 
 # 3. Preprocessing
-- All the text preprocessing functions can be found in [preprocessor](src/preprocessor.py) module
+- All the text preprocessing functions can be found in [preprocessor_funcs](src/preprocessor/preprocessor_funcs.py) module
+- Preprocessing pipelines can be found in [preprocessor_pipelines](src/preprocessor/preprocessor_pipelines.py) module
 
 # 4. Training a Model
 - To define a model, use [model_compiler](src/training/model_compiler.py)
