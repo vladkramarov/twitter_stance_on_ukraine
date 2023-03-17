@@ -9,14 +9,23 @@
 - Data for training, validating, and testing is located in the [dataset](dataset) folder
 - Code for collecting and labeling training data can be found in ... (soon to be added)
 - Tweets were collected using the following 3 methods:
+
         - Search by user:
+
             - E.g. since Donald Trump Junior only critisizes all the help given to Ukraine, his tweets that mention Ukraine are automatically labeled as negative
+
             - Likewise, tweets by Timothy Snyder that mention Ukraine are automatically labeled as positive
+
             - Tweets from neutral news channels (e.g. AP News, Reuters) that mention Ukraine are automatically labeled as neutral
+
         - Search by keywords:
+            
             - Combinations of keywords that will most likely end up in a *positive* tweet towards Ukraine. E.g. - "ukraine will win", "putin is a terrorist", etc.
+            
             - Combinations of keywords that will most likely end up in a *negative* tweet towards Ukraine. E.g. - "puppet government in ukraine", "azov neo-nazi", etc.
+        
         - Search by hashtags:
+            
             - Similar to a keyword search. Used hashtags that would most likely end up in a strongly positive/strongly negative tweet.
 
 # 3. Preprocessing
