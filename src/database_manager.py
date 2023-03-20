@@ -55,11 +55,3 @@ def check_total_entries(table_name: str = DB_TABLE_NAME, connector_func: Callabl
     cursor.execute(query)
     return cursor
     
-
-conn, cursor = connect_to_db()
-
-query = 'SELECT created_at, count(*) from new_tweets_revised GROUP BY created_at'
-
-cursor.execute(query)
-
-cursor.fetchall()
