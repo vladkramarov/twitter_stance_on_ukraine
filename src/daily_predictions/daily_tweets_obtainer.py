@@ -9,7 +9,7 @@ config.read('config.ini')
 KEYWORDS_FOR_DAILY_TWEETS = ['ukraine', 'ukrainian']
 TWEET_LANGUAGE = 'en'
 TWEET_FILTER = '-is:retweet'
-DAILY_TWEET_LIMIT = 10000
+DAILY_TWEET_LIMIT = 100
 PAGE_TWEET_LIMIT = 100
 
 @dataclass
