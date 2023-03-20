@@ -2,16 +2,16 @@ import pandas as pd
 from dash import dcc, Dash, html, dependencies
 from typing import Callable, Dict, List
 import src.dash_app.plotly_chart_components as pcc
-import src.database_manager as dm
+import src.dash_app.generate_chart_data as gcd
 
-chart_data = dm.read_data_from_db()
+chart_data = gcd.read_data_from_db()
 EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 Y_AXIS_LABELS = {'daily_ratios': 'Daily Stance Ratio', 'cumulative_ratios': 'Cumulative Stance Ratio'}
 
 def create_title():
     return html.H1('Twitter\'s stance towards Ukraine')
 
-def create_subheading():
+def create_subheading(chart_data = chart_data):
     return html.Div([
         html.H4(f'The stance is determined based on ~10,000 tweets in English that are collected daily'),
         html.H4(f'Data is gathered starting on {chart_data.created_at.min()} and until {chart_data.created_at.max()}')])

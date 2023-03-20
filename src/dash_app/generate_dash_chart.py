@@ -1,10 +1,9 @@
 import configparser
 import pandas as pd
 from dash import  Dash, dependencies
-from typing import Callable
-import src.database_manager as dm
 import src.dash_app.dash_components as dc
 import src.dash_app.plotly_chart_components as pcc
+import src.dash_app.generate_chart_data as gcd
 config = configparser.ConfigParser(interpolation=None)
 config.read('config.ini')
 
@@ -17,7 +16,7 @@ def render_dash():
                             dependencies.Input('keyword_input', 'value')])
     def update_chart(input_value_1, keyword_value):
         if keyword_value:
-            chart_data = dm.read_data_from_db(keyword_value)
+            chart_data = gcd.read_data_from_db(keyword_value)
             plotly_figure = pcc.render_full_plotly_chart(chart_data, input_value_1)
             plotly_figure.update_layout(
                 title={
@@ -26,7 +25,7 @@ def render_dash():
                     'yanchor': 'top',
                 })
         else:
-            chart_data = dm.read_data_from_db()
+            chart_data = gcd.read_data_from_db()
             plotly_figure = pcc.render_full_plotly_chart(chart_data, input_value_1)
         plotly_figure.update_yaxes(title=dc.Y_AXIS_LABELS[input_value_1])
         return plotly_figure
