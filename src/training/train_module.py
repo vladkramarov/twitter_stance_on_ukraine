@@ -1,4 +1,4 @@
-import src.preprocessor as pp
+import src.preprocessor.preprocessor_pipelines as pp
 import src.core as core
 import src.training.class_train
 import importlib

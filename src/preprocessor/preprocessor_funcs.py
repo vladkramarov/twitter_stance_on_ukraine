@@ -39,8 +39,8 @@ def remove_emojis(tweet: str) -> str:
 def drop_short_tweets(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN) -> pd.DataFrame:
     '''Removes tweets that are shorter than the minimum tweet length words'''
     tweet_length = dataset[text_feature].apply(lambda row: len(str(row).split()))
-    dataset.loc[tweet_length > MIN_TWEET_LENGTH]
-    return dataset
+    revised_dataset = dataset.loc[tweet_length > MIN_TWEET_LENGTH]
+    return revised_dataset
 
 def distilbert_tokenizer(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN) -> Tuple[np.ndarray, np.ndarray]:
     '''Applies distilbert tokenizer on the text column. Returns input ids and attention masks'''
@@ -49,5 +49,6 @@ def distilbert_tokenizer(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN)
     encoded = dict(tokenizer(dataset[text_feature].to_list(), return_tensors = 'np', padding='max_length', truncation=True, max_length = core.MAX_LENGTH))
     input_ids, attention_mask = encoded['input_ids'], encoded['attention_mask']
     return input_ids, attention_mask
+
 
 
