@@ -9,9 +9,10 @@ config.read('config.ini')
 
 
 def render_dash():
-    dash_app = Dash(__name__, external_stylesheets=dc.EXTERNAL_STYLESHEETS)
-    dash_app.layout = dc.create_layout()
-    @dash_app.callback(dependencies.Output('output_chart', 'figure'),
+    application = Dash(__name__, external_stylesheets=dc.EXTERNAL_STYLESHEETS,
+                       assets_folder='static', assets_url_path='static')
+    application.layout = dc.create_layout()
+    @application.callback(dependencies.Output('output_chart', 'figure'),
                         [dependencies.Input('radio_buttons', 'value'),
                             dependencies.Input('keyword_input', 'value')])
     def update_chart(input_value_1, keyword_value):
@@ -31,7 +32,7 @@ def render_dash():
         return plotly_figure
 
     if __name__=='__main__':
-        dash_app.run_server(host ='0.0.0.0', port=8050)
+        application.run_server(host ='0.0.0.0', port=8050)
 
 render_dash()
     
