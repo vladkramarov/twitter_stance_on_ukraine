@@ -9,8 +9,7 @@ config.read('config.ini')
 
 
 def render_dash():
-    application = Dash(__name__, external_stylesheets=dc.EXTERNAL_STYLESHEETS,
-                       assets_folder='static', assets_url_path='static')
+    application = Dash(__name__, external_stylesheets=dc.EXTERNAL_STYLESHEETS)
     application.layout = dc.create_layout()
     @application.callback(dependencies.Output('output_chart', 'figure'),
                         [dependencies.Input('radio_buttons', 'value'),
