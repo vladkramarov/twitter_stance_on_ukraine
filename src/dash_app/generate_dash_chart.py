@@ -31,7 +31,7 @@ def render_dash():
         return plotly_figure
 
     if __name__=='__main__':
-        dash_app.run_server(host ='0.0.0.0', port=80)
+        dash_app.run_server(host ='0.0.0.0', port=8050)
 
 render_dash()
     
