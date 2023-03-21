@@ -7,7 +7,7 @@ phases:
       - pip install -r reqs_for_ec2.txt
   build:
     commands:
-      - python src/dash_app/generate_dash_chart.py
+      - python src/dash_app/application.py
 artifacts:
   files:
     - src/dash_app/generate_chart_data.py
