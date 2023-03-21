@@ -39,3 +39,11 @@ artifacts:
     - type: PARAMETER_STORE
     - version: '1'
     - alias: config.py/password
+
+option_settings:
+  aws:elasticbeanstalk:container:python:
+    WSGIPath: application:server
+    NumProcesses: 1
+    NumThreads: 15
+  aws:elasticbeanstalk:environment:process: 
+    PORT: 8050 # specify the port that Dash app listens on
