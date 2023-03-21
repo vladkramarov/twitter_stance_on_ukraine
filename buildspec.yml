@@ -4,7 +4,7 @@ phases:
     runtime-versions:
       python: 3.10.6
     commands:
-      - pip install -r src/dash-app/reqs_for_ec2.txt
+      - pip install -r reqs_for_ec2.txt
   build:
     commands:
       - python src/dash_app/generate_dash_chart.py
