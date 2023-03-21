@@ -1,0 +1,41 @@
+version: 0.1
+phases:
+  install:
+    runtime-versions:
+      python: 3.10.6
+    commands:
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - python src/dash_app/generate_dash_chart.py
+artifacts:
+  files:
+    - src/dash_app/generate_chart_data.py
+    - src/dash_app/dash_components.py
+    - src/dash_app/plotly_chart_components.py
+    - config.py
+    - src/database_manager.py
+  discard-paths: yes
+  base-directory: /
+  name: TwitterStanceOnUkraine
+  environment-variables:
+    - name: host
+    - value: !Sub '${ConfigValue}'
+    - type: PARAMETER_STORE
+    - version: '1'
+    - alias: config.py/host
+    - name: database
+    - value: !Sub '${ConfigValue}'
+    - type: PARAMETER_STORE
+    - version: '1'
+    - alias: config.py/database
+    - name: user
+    - value: !Sub '${ConfigValue}'
+    - type: PARAMETER_STORE
+    - version: '1'
+    - alias: config.py/user
+    - name: password
+    - value: !Sub '${ConfigValue}'
+    - type: PARAMETER_STORE
+    - version: '1'
+    - alias: config.py/password
