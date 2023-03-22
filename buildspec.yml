@@ -7,14 +7,14 @@ phases:
       - pip install -r reqs_for_ec2.txt
   build:
     commands:
-      - python src/dash_app/application.py
+      - python application.py
 artifacts:
-  # files:
-  #   # - src/dash_app/generate_chart_data.py
-  #   # - src/dash_app/dash_components.py
-  #   # - src/dash_app/plotly_chart_components.py
-  #   # - config.py
-  #   # - src/database_manager.py
+  files:
+    # - src/dash_app/generate_chart_data.py
+    # - src/dash_app/dash_components.py
+    # - src/dash_app/plotly_chart_components.py
+    # - config.py
+    # - src/database_manager.py
   discard-paths: yes
   base-directory: /
   name: TwitterStanceOnUkraine
