@@ -1,7 +1,5 @@
 import pandas as pd
-import configparser
-import psycopg2
-from typing import Callable, Tuple
+from typing import Callable
 import src.database_manager as dm
 
 
