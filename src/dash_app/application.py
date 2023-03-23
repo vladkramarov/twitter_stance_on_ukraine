@@ -9,8 +9,7 @@ config.read('config.ini')
 
 
 def render_dash():
-    app = Dash(__name__, external_stylesheets=dc.EXTERNAL_STYLESHEETS)
-    application = app
+    application = Dash(__name__, external_stylesheets=dc.EXTERNAL_STYLESHEETS)
     application.layout = dc.create_layout()
     @application.callback(dependencies.Output('output_chart', 'figure'),
                         [dependencies.Input('radio_buttons', 'value'),
@@ -31,8 +30,8 @@ def render_dash():
         plotly_figure.update_yaxes(title=dc.Y_AXIS_LABELS[input_value_1])
         return plotly_figure
 
-    if __name__=='__main__':
-        application.run_server(port=8050)
+    return application
 
-render_dash()
-        
+if __name__ =="__main__":
+    application = render_dash()
+    application.run_server(port=8050)
