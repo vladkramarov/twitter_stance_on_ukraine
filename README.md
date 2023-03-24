@@ -40,7 +40,7 @@
     - Results for all models can be viewed via Tensorboard
 
 # 5. Classifying Daily Tweets
-- [daily_predictions](src/daily_predictions.py) is used to download ~10,000 tweets, classify them, and write the results to a database
+- [daily_predictions](src/daily_predictions/daily_predictions.py) is used to download ~10,000 tweets, classify them, and write the results to a database
 
 
 
