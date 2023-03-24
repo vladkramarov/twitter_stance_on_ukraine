@@ -34,9 +34,5 @@ def render_dash():
 
 if __name__ =="__main__":
     application = render_dash()
-    application.run_server(port=8050)
+    application.run_server(host = "0.0.0.0", port=8000)
 
-
-from setuptools import setup, find_packages
-packages = find_packages()
-packages
