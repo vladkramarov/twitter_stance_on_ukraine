@@ -74,5 +74,3 @@ def obtain_daily_tweets(
         
     return pd.DataFrame(tweets)
 
-import gunicorn
-gunicorn.__version__
