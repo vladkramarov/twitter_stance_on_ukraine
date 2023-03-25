@@ -7,6 +7,7 @@ import src.dash_app.generate_chart_data as gcd
 config = configparser.ConfigParser(interpolation=None)
 config.read('config.ini')
 
+
 def render_dash():
     application = Dash(__name__, external_stylesheets=dc.EXTERNAL_STYLESHEETS)
     application.layout = dc.create_layout()
@@ -29,8 +30,8 @@ def render_dash():
             plotly_figure = pcc.render_full_plotly_chart(chart_data, input_value_1)
         plotly_figure.update_yaxes(title=dc.Y_AXIS_LABELS[input_value_1])
         return plotly_figure
+    return application.server
 
-    return application
 if __name__ =="__main__":
     application = render_dash()
-    application.run_server(host = "0.0.0.0", port=8000)
+    application.run(host = "0.0.0.0", port=8000)
