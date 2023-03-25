@@ -34,5 +34,7 @@ def render_dash():
 
 if __name__ =="__main__":
     application = render_dash()
+    server = application.server
     application.run_server(host = "0.0.0.0", port=8000)
+
 
