@@ -10,7 +10,7 @@ KEYWORDS_FOR_DAILY_TWEETS = ['ukraine', 'ukrainian']
 TWEET_LANGUAGE = 'en'
 TWEET_FILTER = '-is:retweet'
 DAILY_TWEET_LIMIT = 1000
-PAGE_TWEET_LIMIT = 100
+PAGE_TWEET_LIMIT = 99
 
 @dataclass
 class TweepyConnector:
