@@ -33,4 +33,4 @@ def render_dash():
     return application
 
 application = render_dash()
-application.run_server(debug=True, host = '0.0.0.0', port = 8080)
+application.run_server(debug=True, host = '0.0.0.0', port = 8050)
