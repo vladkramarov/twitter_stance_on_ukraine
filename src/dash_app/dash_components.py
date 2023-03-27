@@ -18,7 +18,7 @@ def create_subheading(chart_data = chart_data):
 
 def create_search_bar():
     return html.Div([
-        html.H4('Search by Keyword', style={'text-align': 'center'}),
+        html.H4('Search by Keyword ', style={'text-align': 'center'}),
         dcc.Input(id = 'keyword_input', placeholder = 'Enter a keyword here and press Enter', value ='', type = 'text', debounce=True, n_submit=True,
                 style = {'display': 'block', 'margin': 'auto', 'text-align': 'center', 'width': '30%'})])
 
