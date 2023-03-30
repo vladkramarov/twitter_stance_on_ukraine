@@ -1,8 +1,7 @@
-import pandas as pd
-from dash import dcc, Dash, html, dependencies
+from dash import dcc, Dash, html
 from typing import Callable, Dict, List
-import src.dash_app.plotly_chart_components as pcc
-import src.dash_app.generate_chart_data as gcd
+import src.deployment.plotly_chart_components as pcc
+import src.deployment.generate_chart_data as gcd
 
 chart_data = gcd.read_data_from_db()
 EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']

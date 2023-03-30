@@ -1,12 +1,9 @@
 import pandas as pd
 import tweepy
-import configparser
 from datetime import datetime, timedelta, timezone
 from typing import List, Callable, Dict, Union, Tuple
 from dataclasses import dataclass
 import os
-config = configparser.ConfigParser(interpolation=None)
-config.read('config.ini')
 KEYWORDS_FOR_DAILY_TWEETS = ['ukraine', 'ukrainian']
 TWEET_LANGUAGE = 'en'
 TWEET_FILTER = '-is:retweet'

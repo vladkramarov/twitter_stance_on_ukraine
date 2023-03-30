@@ -9,3 +9,4 @@ training_data_obtainer.py
 buildspec.yml
 config.ini
 ebextensions
+.DS_Store

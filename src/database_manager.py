@@ -4,7 +4,6 @@ from typing import Callable, Tuple
 import os
 DB_USER = os.environ['db_user']
 DB_NAME = os.environ['db_name']
-# DB_USER = config.get('DATABASE', 'user')
 DB_PASSWORD = os.environ['db_password']
 DB_HOST = os.environ['db_host']
 DB_TABLE_NAME = 'new_tweets_revised'

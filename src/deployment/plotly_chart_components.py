@@ -1,12 +1,9 @@
 import pandas as pd
-import configparser
 import importlib.util
 import plotly.express as px
 import src.core as core
 import importlib
 importlib.reload(core)
-config = configparser.ConfigParser(interpolation=None)
-config.read('config.ini')
 
 
 def render_plotly_chart(data_for_graph: pd.DataFrame='', y_axis: str = 'cumulative_ratios'):
