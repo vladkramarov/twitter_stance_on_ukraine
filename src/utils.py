@@ -1,5 +1,4 @@
 import pandas as pd
-import tensorboard
 from tensorboard import program
 import src.core as core
 

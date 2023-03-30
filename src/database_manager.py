@@ -1,14 +1,12 @@
 import pandas as pd
-import configparser
 import psycopg2
 from typing import Callable, Tuple
-config = configparser.ConfigParser(interpolation=None)
-config.read('config.ini')
-
-DB_NAME = config.get('DATABASE', 'database')
-DB_USER = config.get('DATABASE', 'user')
-DB_PASSWORD = config.get('DATABASE', 'password')
-DB_HOST = config.get('DATABASE', 'host')
+import os
+DB_USER = os.environ['db_user']
+DB_NAME = os.environ['db_name']
+# DB_USER = config.get('DATABASE', 'user')
+DB_PASSWORD = os.environ['db_password']
+DB_HOST = os.environ['db_host']
 DB_TABLE_NAME = 'new_tweets_revised'
 
 def connect_to_db() -> Tuple:
@@ -54,3 +52,8 @@ def check_total_entries(table_name: str = DB_TABLE_NAME, connector_func: Callabl
     query = f'SELECT COUNT (*) from {table_name}'
     cursor.execute(query)
     return cursor
+
+query = "select created_at, count(*) from new_tweets_revised group by created_at"
+conn, cursor = connect_to_db()
+cursor.execute(query)
+cursor.fetchall()

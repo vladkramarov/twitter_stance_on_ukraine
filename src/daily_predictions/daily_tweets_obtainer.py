@@ -4,6 +4,7 @@ import configparser
 from datetime import datetime, timedelta, timezone
 from typing import List, Callable, Dict, Union, Tuple
 from dataclasses import dataclass
+import os
 config = configparser.ConfigParser(interpolation=None)
 config.read('config.ini')
 KEYWORDS_FOR_DAILY_TWEETS = ['ukraine', 'ukrainian']
@@ -15,11 +16,11 @@ PAGE_TWEET_LIMIT = 100
 @dataclass
 class TweepyConnector:
     '''A class that connects to Twitter API using Tweepy authentication data'''
-    api_key: str = config.get('API', 'api_key')
-    api_key_secret: str = config.get('API', 'api_key_secret')
-    access_token: str = config.get('API', 'access_token')
-    access_token_secret: str = config.get('API', 'ac_tok_secret')
-    bearer_token: str = config.get('API', 'bearer_token')
+    api_key: str = os.environ['api_key']
+    api_key_secret: str = os.environ['api_key_secret']
+    access_token: str = os.environ['access_token']
+    access_token_secret: str = os.environ['ac_tok_secret']
+    bearer_token: str = os.environ['bearer_token']
 
     def authenticate(self):
         '''Authenticates the connection to Tweepy. Returns authenticated OAuthHandler, API and Client objects'''
@@ -50,8 +51,8 @@ def get_tweet_fields(tweet: tweepy.Tweet) -> Dict[str, Union[int, str]]:
      
 def get_dates_for_query() -> Tuple[str, str]:
     '''Generates the start and end dates for searching tweets for the current day'''
-    query_start_date = (datetime.now(timezone.utc)-timedelta(days=3)).astimezone().isoformat()
-    query_end_date = (datetime.now(timezone.utc).astimezone()-timedelta(days=2)).isoformat()
+    query_start_date = (datetime.now(timezone.utc)-timedelta(hours=9)).astimezone().isoformat()
+    query_end_date = (datetime.now(timezone.utc).astimezone()-timedelta(seconds=30)).isoformat()
     return  query_start_date, query_end_date 
     
 def obtain_daily_tweets(
