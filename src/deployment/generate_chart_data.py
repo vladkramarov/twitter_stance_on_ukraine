@@ -1,9 +1,10 @@
 import pandas as pd
 from typing import Callable
 import src.database_manager as dm
+import src.core as core
 
 
-def build_the_query(filter_keyword: str = '', table_name: str = dm.DB_TABLE_NAME) -> str:
+def build_the_query(filter_keyword: str = '', table_name: str = core.TABLE_NAME) -> str:
     '''Builds a PostgreSQL query to obtain data for the cumulative and daily tweet ratios. Allows to select the table name and a filter keyword/phrase'''
 
     return f'''WITH total_count AS (select created_at, COUNT(*) AS daily_total
@@ -27,7 +28,7 @@ def build_the_query(filter_keyword: str = '', table_name: str = dm.DB_TABLE_NAME
                     FROM daily_counts_and_totals'''
 
 
-def read_data_from_db(filter_keyword: str = '', table_name: str = dm.DB_TABLE_NAME, build_the_query: Callable = build_the_query):
+def generate_chart_data(filter_keyword: str = '', table_name: str = core.TABLE_NAME, build_the_query: Callable = build_the_query) -> pd.DataFrame:
     '''Returns a DataFrame containing the queried data.'''
     query = build_the_query(filter_keyword)
     conn, cursor = dm.connect_to_db()

@@ -13,7 +13,7 @@ app.layout = dc.create_layout()
                         dependencies.Input('keyword_input', 'value')])
 def update_chart(input_value_1, keyword_value):
     if keyword_value:
-        chart_data = gcd.read_data_from_db(keyword_value)
+        chart_data = gcd.generate_chart_data(keyword_value)
         plotly_figure = pcc.render_full_plotly_chart(chart_data, input_value_1)
         plotly_figure.update_layout(
             title={
@@ -22,7 +22,7 @@ def update_chart(input_value_1, keyword_value):
                 'yanchor': 'top',
             })
     else:
-        chart_data = gcd.read_data_from_db()
+        chart_data = gcd.generate_chart_data()
         plotly_figure = pcc.render_full_plotly_chart(chart_data, input_value_1)
     plotly_figure.update_yaxes(title=dc.Y_AXIS_LABELS[input_value_1])
     return plotly_figure

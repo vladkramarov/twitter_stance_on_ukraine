@@ -3,13 +3,14 @@ import numpy as np
 from transformers import TFDistilBertModel
 import tensorflow as tf
 import src.database_manager as dm
-import src.daily_predictions.daily_tweets_obtainer as dto
+import src.predict.daily_tweets_obtainer as dto
 from tensorflow.keras.models import load_model
 import src.preprocessor.preprocessor_pipelines as pp
 import src.core as core
 import importlib
 importlib.reload(dto)
 importlib.reload(dm)
+importlib.reload(core)
 
 def classify_daily_tweets(dataset: pd.DataFrame, input_ids: np.ndarray, attention_mask: np.ndarray) -> pd.DataFrame:
     '''Loads the best model, makes predictions on the input_ids and attention_mask, and returns a DataFrame of the original tweets with classification labels'''
@@ -27,6 +28,7 @@ def daily_tweets_classification_pipeline():
                 3. Preprocesses them
                 4. Classifies them
                 5. Writes them to the db'''
+    
     connector = dto.TweepyConnector()
     daily_tweets = dto.obtain_daily_tweets(connector)
     new_tweets, input_ids, attention_masks = pp.preprocess_pipeline(daily_tweets)
@@ -34,4 +36,6 @@ def daily_tweets_classification_pipeline():
     dm.write_to_db(new_tweets_with_labels)
     
 daily_tweets_classification_pipeline()
+
+
 

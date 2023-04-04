@@ -3,7 +3,7 @@ from typing import Callable, Dict, List
 import src.deployment.plotly_chart_components as pcc
 import src.deployment.generate_chart_data as gcd
 
-chart_data = gcd.read_data_from_db()
+chart_data = gcd.generate_chart_data()
 EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 Y_AXIS_LABELS = {'daily_ratios': 'Daily Stance Ratio', 'cumulative_ratios': 'Cumulative Stance Ratio'}
 
@@ -30,6 +30,8 @@ def create_main_chart(render_full_plotly_chart: Callable = pcc.render_full_plotl
             dcc.Graph(
                     id = 'output_chart', figure=render_full_plotly_chart(chart_data)), 
                     style={'display': 'inline-block', 'margin': 'auto', 'position': 'absolute', 'left': 290, 'right': 250, 'top': 250, 'bottom': 220})
+
+
 
 def create_layout():
     return html.Div([

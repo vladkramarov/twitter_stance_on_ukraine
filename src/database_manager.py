@@ -2,11 +2,12 @@ import pandas as pd
 import psycopg2
 from typing import Callable, Tuple
 import os
+import src.core as core
 DB_USER = os.environ['db_user']
 DB_NAME = os.environ['db_name']
 DB_PASSWORD = os.environ['db_password']
-DB_HOST = os.environ['db_host']
-DB_TABLE_NAME = 'new_tweets_revised'
+# DB_HOST = os.environ['db_host']
+DB_HOST = 'postgres.c6afpkvlpprl.us-west-2.rds.amazonaws.com'
 
 def connect_to_db() -> Tuple:
     '''Connects to the specified PostgreSQL database, returns a connection and cursor objects'''
@@ -37,22 +38,27 @@ def delete_db(table_name: str, connector_func: Callable = connect_to_db) -> None
     conn.close()
 
 
-def write_to_db(dataset_with_labels: pd.DataFrame, table_name: str = DB_TABLE_NAME, connector_func: Callable = connect_to_db) -> None:
+def write_to_db(dataset_with_labels: pd.DataFrame, table_name: str = core.TABLE_NAME, connector_func: Callable = connect_to_db) -> None:
     '''Writes a Pandas DataFrame to a PostreSQL table with the specified name'''
     conn, cursor = connector_func()
     for index, row in dataset_with_labels.iterrows():
-        cursor.execute(f'''INSERT INTO {table_name} (tweet_id, author_id, text, created_at, like_count, impression_count, retweet_count, quote_count, label) 
+        cursor.execute(f'''EXPLAIN ANALYZE INSERT INTO {table_name} (tweet_id, author_id, text, created_at, like_count, impression_count, retweet_count, quote_count, label) 
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (tweet_id) DO NOTHING''',
         (row['tweet_id'], row['author_id'], row['text'], row['created_at'], row['like_count'], row['impression_count'], row['retweet_count'], row['quote_count'], row['label']))
-    conn.commit()
-
-def check_total_entries(table_name: str = DB_TABLE_NAME, connector_func: Callable = connect_to_db) -> int:
+    g = cursor.fetchall()
+    # conn.commit()
+    # conn.close()
+    return g
+def check_total_entries(table_name: str = core.TABLE_NAME, connector_func: Callable = connect_to_db) -> int:
     conn, cursor = connector_func()
     query = f'SELECT COUNT (*) from {table_name}'
     cursor.execute(query)
-    return cursor
+    return cursor.fetchall()
 
-query = "select created_at, count(*) from new_tweets_revised group by created_at"
-conn, cursor = connect_to_db()
-cursor.execute(query)
-cursor.fetchall()
+def check_tweets_per_day(table_name: str = core.TABLE_NAME, connector_func: Callable = connect_to_db):
+    conn, cursor = connector_func()
+    query = f'SELECT created_at, COUNT (*) from {table_name} GROUP BY created_at'
+    cursor.execute(query)
+    return cursor.fetchall()
+
+check_tweets_per_day()
