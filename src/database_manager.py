@@ -6,8 +6,7 @@ import src.core as core
 DB_USER = os.environ['db_user']
 DB_NAME = os.environ['db_name']
 DB_PASSWORD = os.environ['db_password']
-# DB_HOST = os.environ['db_host']
-DB_HOST = 'postgres.c6afpkvlpprl.us-west-2.rds.amazonaws.com'
+DB_HOST = os.environ['db_host']
 
 def connect_to_db() -> Tuple:
     '''Connects to the specified PostgreSQL database, returns a connection and cursor objects'''
@@ -60,5 +59,3 @@ def check_tweets_per_day(table_name: str = core.TABLE_NAME, connector_func: Call
     query = f'SELECT created_at, COUNT (*) from {table_name} GROUP BY created_at'
     cursor.execute(query)
     return cursor.fetchall()
-
-check_tweets_per_day()
