@@ -6,7 +6,7 @@ import importlib
 importlib.reload(core)
 
 
-def render_plotly_chart(data_for_graph: pd.DataFrame='', y_axis: str = 'cumulative_ratios'):
+def render_plotly_chart(data_for_graph: pd.DataFrame='', y_axis: str = 'daily_ratios'):
     '''Initializes a plotly chart with pre-defined colors for each line'''
     color_map = {
         'positive': '#27ae60',
@@ -31,7 +31,7 @@ def add_date_buttons(plotly_object):
 
     return plotly_object
 
-def render_full_plotly_chart(data, y_axis = 'cumulative_ratios'):
+def render_full_plotly_chart(data, y_axis = 'daily_ratios'):
     fig = render_plotly_chart(data, y_axis)
     fig = add_date_buttons(fig)
     return fig
