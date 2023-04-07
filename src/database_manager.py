@@ -41,13 +41,11 @@ def write_to_db(dataset_with_labels: pd.DataFrame, table_name: str = core.TABLE_
     '''Writes a Pandas DataFrame to a PostreSQL table with the specified name'''
     conn, cursor = connector_func()
     for index, row in dataset_with_labels.iterrows():
-        cursor.execute(f'''EXPLAIN ANALYZE INSERT INTO {table_name} (tweet_id, author_id, text, created_at, like_count, impression_count, retweet_count, quote_count, label) 
+        cursor.execute(f'''INSERT INTO {table_name} (tweet_id, author_id, text, created_at, like_count, impression_count, retweet_count, quote_count, label) 
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (tweet_id) DO NOTHING''',
         (row['tweet_id'], row['author_id'], row['text'], row['created_at'], row['like_count'], row['impression_count'], row['retweet_count'], row['quote_count'], row['label']))
-    g = cursor.fetchall()
-    # conn.commit()
-    # conn.close()
-    return g
+    conn.commit()
+    conn.close()
 def check_total_entries(table_name: str = core.TABLE_NAME, connector_func: Callable = connect_to_db) -> int:
     conn, cursor = connector_func()
     query = f'SELECT COUNT (*) from {table_name}'
@@ -59,3 +57,4 @@ def check_tweets_per_day(table_name: str = core.TABLE_NAME, connector_func: Call
     query = f'SELECT created_at, COUNT (*) from {table_name} GROUP BY created_at'
     cursor.execute(query)
     return cursor.fetchall()
+

@@ -36,3 +36,10 @@ def train_and_evaluate() -> Tuple[ct.Classifier, ct.Evaluator]:
 
 clasifier, evaluator = train_and_evaluate()
 evaluator.sanity_test_accuracy
+
+import pandas as pd
+train_data = pd.read_csv(core.TRAIN_DATASET_DIR).shape
+print(train_data)
+valid_data = pd.read_csv(core.VALID_DATASET_DIR).shape
+test_data = pd.read_csv(core.TEST_DATASET_DIR).shape
+test_data

@@ -59,6 +59,7 @@ def obtain_daily_tweets(
         get_tweet_fields: Callable=get_tweet_fields, 
         max_results: int = PAGE_TWEET_LIMIT, 
         limit: int = DAILY_TWEET_LIMIT) -> pd.DataFrame:
+    
     '''Searches for tweets posted on the current date. Returns a DataFrame'''
     _, _,  client = tweepy_connector.authenticate()
     query = get_query_body()
