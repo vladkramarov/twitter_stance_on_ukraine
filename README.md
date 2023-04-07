@@ -8,7 +8,7 @@
 
 ## 2. Training Data
 - Data for training, validating, and testing is located in the [dataset](dataset) folder
-- Code for collecting and labeling training data can be found in ... (soon to be added)
+- Code for collecting and labeling training data can be found in [training_data_obtainer](src/training_data_obtainer.py)
 - Tweets were collected using the following 3 methods:
 - Search by user:
     - E.g. since Donald Trump Junior only critisizes all the help given to Ukraine, his tweets that mention Ukraine are automatically labeled as negative

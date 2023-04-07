@@ -4,7 +4,6 @@ import configparser
 import numpy as np
 from transformers import DistilBertTokenizer
 import src.core as core
-import keras.utils
 from typing import Tuple
 
 MIN_TWEET_LENGTH = 2

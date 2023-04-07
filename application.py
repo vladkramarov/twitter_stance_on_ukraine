@@ -25,10 +25,9 @@ def update_chart(last_7_days_clicks, input_value_1, keyword_value):
         plotly_figure = pcc.render_full_plotly_chart(chart_data, input_value_1)
         plotly_figure.update_layout(
             title={
-                'text': f'Tweets that mention {keyword_value}' if keyword_value else 'All tweets',
-                'x': 0.47,
-                'yanchor': 'top',
-            }
+            'text': f'Tweets that mention {keyword_value}' if keyword_value else 'All tweets',
+            'x': 0.47,
+            'yanchor': 'top',}
             )
     else:
         chart_data = gcd.generate_chart_data(conn, filter_keyword=keyword_value)

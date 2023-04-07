@@ -3,10 +3,10 @@ from keras import Model
 from tensorflow.keras.optimizers.legacy import Adam
 from keras.layers import Conv1D, MaxPooling1D, LSTM, Bidirectional, GlobalMaxPooling1D, BatchNormalization, Dense, Input, Concatenate
 import src.core as core
-import src.training.class_train
+import src.training.classifier
 import importlib
 importlib.reload(core)
-importlib.reload(src.training.class_train)
+importlib.reload(src.training.classifier)
 from transformers import TFDistilBertModel
 
 checkpoint = 'distilbert-base-uncased'

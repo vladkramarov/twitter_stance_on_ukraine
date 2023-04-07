@@ -1,5 +1,4 @@
 import pandas as pd
-from typing import Callable
 import src.database_manager as dm
 import src.core as core
 import datetime

@@ -1,14 +1,13 @@
 import src.preprocessor.preprocessor_pipelines as pp
 import src.core as core
-import src.training.class_train
 import importlib
 from transformers import TFDistilBertModel
-import src.training.class_train as ct
+import src.training.classifier as ct
 import src.training.model_compiler as mc
 import src.utils as ut
 from typing import Tuple
 importlib.reload(core)
-importlib.reload(src.training.class_train)
+importlib.reload(src.training.classifier)
 importlib.reload(pp)
 importlib.reload(ct)
 importlib.reload(mc)

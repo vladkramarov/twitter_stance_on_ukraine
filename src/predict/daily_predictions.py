@@ -37,9 +37,4 @@ def daily_tweets_classification_pipeline():
     
 
 
-backfill_tweets_with_labels = pd.read_csv('backfill_tweets.csv')
-backfill_tweets_with_labels.rename(columns={'id':'tweet_id', 'username':'author_id'}, inplace=True)
-backfill_tweets_with_labels['author_id'] =0
-tweets_to_db = backfill_tweets_with_labels[15000:25000]
-tweets_to_db.dropna(inplace=True)
-dm.write_to_db(tweets_to_db)
+
