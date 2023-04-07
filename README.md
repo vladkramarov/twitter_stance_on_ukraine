@@ -38,7 +38,8 @@
 - An interactive Dash app is used to visualize the results. The main chart for the Dash app is created in Plotly [plotly_chart_components](src/deployment/plotly_chart_components.py)
 - SQL query used to generate data for Dash app can be found in [generate_chart_data](src/deployment/generate_chart_data.py)
 - All the Dash app components are in [dash_components](src/deployment/dash_components.py)
-- The actual app is deployed on Elastic Beanstalk. AWS Codepipeline is used for CI/CD. Here is the [app](application.py)
+- The actual app is deployed on Elastic Beanstalk. AWS Codepipeline is used for CI/CD. The code to the app is in [application](application.py), and here is the actual [link](http://twitterukraine-env.eba-ybme3mms.us-east-1.elasticbeanstalk.com/)
+
 
 
 
