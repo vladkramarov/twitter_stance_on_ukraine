@@ -10,15 +10,15 @@
 - Data for training, validating, and testing is located in the [dataset](dataset) folder
 - Code for collecting and labeling training data can be found in ... (soon to be added)
 - Tweets were collected using the following 3 methods:
-        - Search by user:
-            - E.g. since Donald Trump Junior only critisizes all the help given to Ukraine, his tweets that mention Ukraine are automatically labeled as negative
-            - Likewise, tweets by Timothy Snyder that mention Ukraine are automatically labeled as positive
-            - Tweets from neutral news channels (e.g. AP News, Reuters) that mention Ukraine are automatically labeled as neutral
-        - Search by keywords:
-            - Combinations of keywords that will most likely end up in a *positive* tweet towards Ukraine. E.g. - "ukraine will win", "putin is a terrorist", etc.
-            - Combinations of keywords that will most likely end up in a *negative* tweet towards Ukraine. E.g. - "puppet government in ukraine", "azov neo-nazi", etc.
-        - Search by hashtags:
-            - Similar to a keyword search. Used hashtags that would most likely end up in a strongly positive/strongly negative tweet.
+- Search by user:
+    - E.g. since Donald Trump Junior only critisizes all the help given to Ukraine, his tweets that mention Ukraine are automatically labeled as negative
+    - Likewise, tweets by Timothy Snyder that mention Ukraine are automatically labeled as positive
+    - Tweets from neutral news channels (e.g. AP News, Reuters) that mention Ukraine are automatically labeled as neutral
+- Search by keywords:
+    - Combinations of keywords that will most likely end up in a *positive* tweet towards Ukraine. E.g. - "ukraine will win", "putin is a terrorist", etc.
+    - Combinations of keywords that will most likely end up in a *negative* tweet towards Ukraine. E.g. - "puppet government in ukraine", "azov neo-nazi", etc.
+- Search by hashtags:
+    - Similar to a keyword search. Used hashtags that would most likely end up in a strongly positive/strongly negative tweet.
 - Train data size ~33,000 tweets, validation and test data are ~11,000 tweets each
 ## 3. Preprocessing
 - All the text preprocessing functions can be found in [preprocessor_funcs](src/preprocessor/preprocessor_funcs.py) module
@@ -37,8 +37,8 @@
 ## 6. Deployment
 - An interactive Dash app is used to visualize the results. The main chart for the Dash app is created in Plotly [plotly_chart_components](src/deployment/plotly_chart_components.py)
 - SQL query used to generate data for Dash app can be found in [generate_chart_data](src/deployment/generate_chart_data.py)
-- All the Dash app components are in [dash_components] (src/deployment/dash_components.py)
-- The actual app is deployed on Elastic Beanstalk. AWS Codepipeline is used for CI/CD. Here is the [app] (application.py)
+- All the Dash app components are in [dash_components](src/deployment/dash_components.py)
+- The actual app is deployed on Elastic Beanstalk. AWS Codepipeline is used for CI/CD. Here is the [app](application.py)
 
 
 
