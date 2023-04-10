@@ -7,7 +7,7 @@ import os
 KEYWORDS_FOR_DAILY_TWEETS = ['ukraine', 'ukrainian']
 TWEET_LANGUAGE = 'en'
 TWEET_FILTER = '-is:retweet'
-DAILY_TWEET_LIMIT = 1000
+DAILY_TWEET_LIMIT = 5000
 PAGE_TWEET_LIMIT = 100
 
 @dataclass
@@ -48,8 +48,8 @@ def get_tweet_fields(tweet: tweepy.Tweet) -> Dict[str, Union[int, str]]:
      
 def get_dates_for_query() -> Tuple[str, str]:
     '''Generates the start and end dates for searching tweets for the current day'''
-    query_start_date = (datetime.now(timezone.utc)-timedelta(hours = 24)).astimezone().isoformat()
-    query_end_date = (datetime.now(timezone.utc).astimezone()-timedelta(hours=1)).isoformat()
+    query_start_date = (datetime.now(timezone.utc)-timedelta(hours = 48)).astimezone().isoformat()
+    query_end_date = (datetime.now(timezone.utc).astimezone()-timedelta(hours=36)).isoformat()
     return  query_start_date, query_end_date 
     
 def obtain_daily_tweets(
