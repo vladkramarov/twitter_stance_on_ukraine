@@ -10,8 +10,6 @@ MIN_TWEET_LENGTH = 2
 TEXT_COLUMN = 'text'
 LABEL_COLUMN = 'label'
 
-config = configparser.ConfigParser(interpolation=None)
-config.read('config.ini')
     
 def persist_string_type(dataset: pd.DataFrame, text_feature: str = TEXT_COLUMN):
     return dataset[text_feature].astype(str)

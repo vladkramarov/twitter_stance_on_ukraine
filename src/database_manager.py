@@ -46,6 +46,7 @@ def write_to_db(dataset_with_labels: pd.DataFrame, table_name: str = core.TABLE_
         (row['tweet_id'], row['author_id'], row['text'], row['created_at'], row['like_count'], row['impression_count'], row['retweet_count'], row['quote_count'], row['label']))
     conn.commit()
     conn.close()
+
 def check_total_entries(table_name: str = core.TABLE_NAME, connector_func: Callable = connect_to_db) -> int:
     conn, cursor = connector_func()
     query = f'SELECT COUNT (*) from {table_name}'
@@ -58,5 +59,3 @@ def check_tweets_per_day(table_name: str = core.TABLE_NAME, connector_func: Call
     cursor.execute(query)
     return cursor.fetchall()
 
-
-check_tweets_per_day()

@@ -21,7 +21,7 @@ def classify_daily_tweets(dataset: pd.DataFrame, input_ids: np.ndarray, attentio
     dataset['label'] = predicted
     return dataset
 
-def daily_tweets_classification_pipeline():
+def daily_tweets_classification_pipeline(hours_start, hours_end):
     '''Pipeline that does the following: 
                 1. Connects to Tweepy
                 2. Obtains daily tweets
@@ -30,9 +30,18 @@ def daily_tweets_classification_pipeline():
                 5. Writes them to the db'''
     
     connector = dto.TweepyConnector()
-    daily_tweets = dto.obtain_daily_tweets(connector)
+    daily_tweets = dto.obtain_daily_tweets(hours_start, hours_end,connector)
     new_tweets, input_ids, attention_masks = pp.preprocess_pipeline(daily_tweets)
     new_tweets_with_labels = classify_daily_tweets(new_tweets, input_ids, attention_masks)
     dm.write_to_db(new_tweets_with_labels)
-    
-daily_tweets_classification_pipeline()
+
+daily_tweets_classification_pipeline(hours_start=167, hours_end=6*24)
+daily_tweets_classification_pipeline(hours_start=6*24, hours_end=5*24)
+daily_tweets_classification_pipeline(hours_start=5*24, hours_end=4*24)
+# daily_tweets_classification_pipeline(hours_start=24, hours_end=)
+# backfill_tweets_with_labels = pd.read_csv('backfill_tweets.csv')
+# backfill_tweets_with_labels.rename(columns={'id':'tweet_id', 'username':'author_id'}, inplace=True)
+# backfill_tweets_with_labels['author_id'] =0
+# tweets_to_db = backfill_tweets_with_labels[150000:]
+# tweets_to_db.dropna(inplace=True)
+# dm.write_to_db(tweets_to_db)

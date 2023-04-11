@@ -7,7 +7,7 @@ import os
 KEYWORDS_FOR_DAILY_TWEETS = ['ukraine', 'ukrainian']
 TWEET_LANGUAGE = 'en'
 TWEET_FILTER = '-is:retweet'
-DAILY_TWEET_LIMIT = 5000
+DAILY_TWEET_LIMIT = 10000
 PAGE_TWEET_LIMIT = 100
 
 @dataclass
@@ -46,13 +46,13 @@ def get_tweet_fields(tweet: tweepy.Tweet) -> Dict[str, Union[int, str]]:
          'quote_count': tweet.public_metrics['quote_count']
          }
      
-def get_dates_for_query() -> Tuple[str, str]:
+def get_dates_for_query(hours_start, hours_end) -> Tuple[str, str]:
     '''Generates the start and end dates for searching tweets for the current day'''
-    query_start_date = (datetime.now(timezone.utc)-timedelta(hours = 48)).astimezone().isoformat()
-    query_end_date = (datetime.now(timezone.utc).astimezone()-timedelta(hours=36)).isoformat()
+    query_start_date = (datetime.now(timezone.utc)-timedelta(hours = hours_start)).astimezone().isoformat()
+    query_end_date = (datetime.now(timezone.utc).astimezone()-timedelta(hours=hours_end)).isoformat()
     return  query_start_date, query_end_date 
     
-def obtain_daily_tweets(
+def obtain_daily_tweets(hours_start, hours_end,
         tweepy_connector: TweepyConnector, 
         get_query_body: Callable=get_query_body, 
         get_dates_for_query: Callable=get_dates_for_query,
@@ -63,7 +63,7 @@ def obtain_daily_tweets(
     '''Searches for tweets posted on the current date. Returns a DataFrame'''
     _, _,  client = tweepy_connector.authenticate()
     query = get_query_body()
-    query_start_date, query_end_date = get_dates_for_query()
+    query_start_date, query_end_date = get_dates_for_query(hours_start, hours_end)
     tweets = []
     for tweet in tweepy.Paginator(client.search_recent_tweets, query, tweet_fields=['context_annotations', 'created_at', 'public_metrics'], 
                                   expansions=['author_id'], max_results=max_results, 
