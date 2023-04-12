@@ -4,7 +4,6 @@ from transformers import TFDistilBertModel
 import tensorflow as tf
 import src.database_manager as dm
 import src.predict.daily_tweets_obtainer as dto
-from tensorflow.keras.models import load_model
 import src.preprocessor.preprocessor_pipelines as pp
 import src.core as core
 import importlib

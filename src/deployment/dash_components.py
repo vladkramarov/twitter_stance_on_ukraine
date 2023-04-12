@@ -20,50 +20,43 @@ def create_subheading(chart_data):
 def create_search_bar():
     '''Creates a search bar to filter tweets by a keyword'''
     return html.Div([
-        html.H4('Search by Keyword ', style={'text-align': 'center'}),
+        html.H4('Filter tweets by keywords of phrases', style={'text-align': 'center'}),
         dcc.Input(id = 'keyword_input', placeholder = 'Enter a keyword here and press Enter', value ='', type = 'text', debounce=True, n_submit=True,
-                style = {'display': 'block', 'margin': 'auto', 'text-align': 'center', 'width': '30%'})])
+                style = {'display': 'block', 'margin': 'auto', 'text-align': 'center', 'width': '100%'})])
 
 def create_radio_items():
     '''Creates 2 buttons (radio items) that allow to toggle between daily and cumulative ratios'''
-    return dcc.RadioItems(id = 'radio_buttons', value='daily_ratios', 
+    return html.Div([
+        html.H4('Choose daily or cumulative ratios', style={'text-align': 'center'}),
+        dcc.RadioItems(id = 'radio_buttons', value='daily_ratios', 
                     options=[{'label': Y_AXIS_LABELS[value], 'value': value} for value in Y_AXIS_LABELS.keys()
-                                ])
+                                ])])
 
 def create_date_picker():
     '''Creates a button that allows to filter out all tweets but the ones that were created within the last 7 days'''
-    return html.Div([
-        html.Div(id='output-container-date-picker-single'),
-        html.Div([
-            html.H6('Filter tweets by the start date'),
-            dcc.DatePickerSingle(
+    return  html.Div([
+        html.H4('Select query start date'),
+        dcc.DatePickerSingle(
                 id='date_picker_single', 
                 min_date_allowed=datetime.date(2023, 2, 2), 
                 max_date_allowed=datetime.date(2023, 4, 9), 
                 initial_visible_month=datetime.date(2023, 3, 10),
                 date=datetime.date(2023, 2, 2),
-                style={'display': 'flex', 'flex-direction': 'column', 'justify-content': 'center'}
+                style={'display': 'block', 'margin': 'auto', 'text-align': 'center', 'width': '100%'})])
+def description_card(chart_data):
+    """ """
+    return html.Div(
+        id="description-card",
+        children=[
+            html.H3("Twitter's Sentiment on the war in Ukraine"),
+            html.H5("Based on ~10,000 english tweets collected daily"),
+            html.H5(f'Tweets are collected starting on {chart_data.created_at.min()}'),
+            html.Div(
+                id="intro",
+                children=".",
             ),
         ],
-        style={'display': 'flex', 'justify-content': 'center', 'flex-direction': 'column', 'align-items': 'flex-end'}),
-    ],
-    style={'position': 'absolute', 'top': '10px', 'right': '15px', 'display': 'flex', 'flex-direction': 'column', 'align-items': 'flex-end'})
-
-
-
-
-# def create_card(chart_data):
-#     highest_ratio, label = gcd.select_highest_ratio_and_label(chart_data)
-#     card_text = f'With {highest_ratio:.0%} {label} tweets'
-#     background_color = CARD_BACKGROUND_COLORS[label]
-#     return html.Div(
-#         [dbc.Card(
-#                 [dbc.CardHeader("Overall Stance"),
-                 
-#                  dbc.CardBody(
-#                 [html.H3(f'{label.capitalize()}', className='text-center', id='card-label'),
-#                     html.P(card_text)], id='card',style={'backgroundColor': background_color, 'width': '24rem'})], color='dark', outline=True,
-#                     style= {'display': 'flex', 'justify-content': 'flex-end', 'align-items': 'right', 'position': 'absolute', 'top': '20px', 'right': '20px'})])
+    )
 
 def create_main_chart(chart_data, render_full_plotly_chart: Callable = pcc.render_full_plotly_chart):
     '''A function to render plotly chart with updated data'''
@@ -78,14 +71,61 @@ def create_main_chart(chart_data, render_full_plotly_chart: Callable = pcc.rende
                         figure=render_full_plotly_chart(chart_data))])
         ]
     )
+def create_ridge_plots(chart_data):
+    return html.Div(
+        style={'position': 'absolute', 'top': '35%', 'left': '50%', 'transform': 'translate(-10%, 50%)'},
+        children=[
+        dcc.Graph(id='ridge_plot',
+                  figure = pcc.ridge_plot(chart_data))])
+
 def create_layout(chart_data):
     '''A function that generates the whole layout'''
     return html.Div([
-        create_title(),
-        create_subheading(chart_data),
-        create_search_bar(),
-        create_radio_items(),
-        create_date_picker(),
-        # create_card(chart_data),
-        create_main_chart(chart_data)])
+        html.Div(
+            id='left_column',
+            className='three columns',
+            children=[
+                description_card(chart_data), 
+                html.Br(),
+                create_radio_items(),
+                html.Br(),
+                create_search_bar(),
+                html.Br(),
+                create_date_picker(),
+                html.P('Cumulative ratios will be recalculated based on selected date')
+            ], 
+            style={
+                'background-color': '#f4f4f4',
+                'margin-top': '20px',
+                'padding': '0rem 2rem',
+                'display': 'flex',
+                'flex-direction': 'column',
+                'align-items': 'center',
+                'min-height': 'calc(100vh - 5.5rem)'
+            }
+        ), 
+        html.Div(
+            id='right_column',
+            className='nine columns',
+            children=[
+                html.Br(),
+                create_main_chart(chart_data),
+                html.Br(),
+                create_ridge_plots(chart_data)
+            ], 
+            style={
+                'padding': '0rem 2rem',
+                'min-height': 'calc(100vh - 5.5rem)'
+            }
+        ),
+    ])
+
+
+        # description_card(),
+        # create_subheading(chart_data),
+        # create_search_bar(),
+        # create_radio_items(),
+        # create_date_picker(),
+        # # create_card(chart_data),
+        # create_main_chart(chart_data)])
 
