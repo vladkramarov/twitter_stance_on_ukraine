@@ -52,4 +52,5 @@ In this project, Twitter's stance towards the war in Ukraine is determined using
 
 ## 7. Issues
 - Very high latency, when updating the main chart. Every callback queries new dataset from the DB, and it is slow. Please be patient for now :)
+- The app is made for computer screens, no mobile version (yet?)
 

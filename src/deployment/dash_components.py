@@ -35,8 +35,17 @@ def create_search_bar():
     '''Creates a search bar to filter tweets by a keyword'''
     return html.Div([
         html.H4('Filter tweets by keywords of phrases', style={'text-align': 'left'}),
-        dcc.Input(id = 'keyword_input', placeholder = 'Enter a keyword here and press Enter', value ='', type = 'text', debounce=True, n_submit=True,
+        dcc.Input(id = 'keyword_input', placeholder = 'Enter a keyword here and press Enter', 
+                  value ='', type = 'text', debounce=True, n_submit=True, list='browser',
                 style = {'display': 'block', 'margin': 'auto', 'text-align': 'left', 'width': '100%'})])
+
+def create_datalist_for_search_bar():
+    '''Creates a list of possible options for the search bar'''
+    return html.Datalist(id='browser', children=[
+        html.Option(value='bakhmut'),
+        html.Option(value='putin'),
+        html.Option(value='nato')
+    ])
 
 def create_radio_items():
     '''Creates 2 buttons (radio items) that allow to toggle between daily and cumulative ratios'''
@@ -101,6 +110,8 @@ def create_layout(chart_data):
                 create_radio_items(),
                 html.Br(),
                 create_search_bar(),
+                create_datalist_for_search_bar(),
+                html.Br(),
                 html.Br(),
                 create_date_picker(),
                 html.P('Cumulative ratios will be recalculated based on selected date'),
