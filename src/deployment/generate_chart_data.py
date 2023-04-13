@@ -1,5 +1,6 @@
 import pandas as pd
 import src.core as core
+import src.database_manager as dm
 
 def build_the_query(filter_keyword: str = '', table_name: str = core.TABLE_NAME, query_start_date: str = '2023-02-01') -> str:
     '''Builds a PostgreSQL query to obtain data for the cumulative and daily tweet ratios. Allows to select the table name and a filter keyword/phrase'''
@@ -27,19 +28,11 @@ def build_the_query(filter_keyword: str = '', table_name: str = core.TABLE_NAME,
                     FROM daily_counts_and_totals'''
 
 
-def generate_chart_data(db_connector, filter_keyword: str = '', table_name: str = core.TABLE_NAME, query_start_date: str = '2023-02-01') -> pd.DataFrame:
+def generate_chart_data(db_conn, filter_keyword: str = '', table_name: str = core.TABLE_NAME, query_start_date: str = '2023-02-01') -> pd.DataFrame:
     '''Returns a DataFrame containing the queried data.'''
     query = build_the_query(filter_keyword, query_start_date=query_start_date)
     values_to_replace_labels = {0: 'positive', 1: 'negative', 2: 'neutral'}
-    data = pd.read_sql_query(query, db_connector)
+    data = pd.read_sql_query(query, db_conn)
     data['label'] = data['label'].replace(values_to_replace_labels)
 
     return data
-
-def select_highest_ratio_and_label(data):
-    '''Returns the label with the highest cumulative ratio as well as the actual ratio. Used for the Card Visual'''
-    latest_data = data[data['created_at']==data['created_at'].max()]
-    highest_ratio_row = latest_data.loc[latest_data['cumulative_ratios'].idxmax()]
-
-    return highest_ratio_row['cumulative_ratios'], highest_ratio_row['label']
-
