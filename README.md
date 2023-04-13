@@ -1,10 +1,15 @@
 # twitter_stance_on_ukraine
 
+## Overview
+In this project, Twitter's stance towards the war in Ukraine is determined using Distlbert transformer with a shallow NN.
+- Approximately 10K tweets that mention Ukraine are classified daily
+- Aggregated results are shown in a Dash app, deployed on Elastic Beanstalk
+
+
 ## 1. Running the code
 - Install Python 3.10.0 or above
 - Required packages for the **whole repo are in** [requirements_full](requirements_full.txt)
 - [requirements](requirements.txt) is for **deployment purposes only**
-
 
 ## 2. Training Data
 - Data for training, validating, and testing is located in the [dataset](dataset) folder
@@ -42,7 +47,7 @@
 - An interactive Dash app is used to visualize the results. The main chart for the Dash app is created in Plotly [plotly_chart_components](src/deployment/plotly_chart_components.py)
 - SQL query used to generate data for Dash app can be found in [generate_chart_data](src/deployment/generate_chart_data.py)
 - All the Dash app components are in [dash_components](src/deployment/dash_components.py)
-- The actual app is deployed on Elastic Beanstalk. AWS Codepipeline is used for CI/CD. The code to the app is in [application](application.py), and here is the actual [link](http://twitterukraine-env.eba-ybme3mms.us-east-1.elasticbeanstalk.com/)
+- The actual app is deployed on Elastic Beanstalk. AWS Codepipeline is used for CI/CD. The code to the app is in [application](application.py); the actual app can be found [here](http://twitterukraine-env.eba-ybme3mms.us-east-1.elasticbeanstalk.com/)
 
 
 
