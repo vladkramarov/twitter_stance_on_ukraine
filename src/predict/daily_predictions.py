@@ -7,6 +7,8 @@ import src.predict.daily_tweets_obtainer as dto
 import src.preprocessor.preprocessor_pipelines as pp
 import src.core as core
 import importlib
+from tensorflow.keras.models import load_model
+
 importlib.reload(dto)
 importlib.reload(dm)
 importlib.reload(core)
@@ -34,3 +36,5 @@ def daily_tweets_classification_pipeline(hours_start, hours_end):
     new_tweets_with_labels = classify_daily_tweets(new_tweets, input_ids, attention_masks)
     dm.write_to_db(new_tweets_with_labels)
 
+
+daily_tweets_classification_pipeline(24,12)
