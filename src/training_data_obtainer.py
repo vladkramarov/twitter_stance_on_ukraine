@@ -1,7 +1,6 @@
 import snscrape.modules.twitter as snstwitter
 import pandas as pd
 from typing import List
-import src.database_manager as dm
 
 class GetTweets:
   def __init__(self, since_date: str = None, until_date: str = None, lang: str = ":en", filter: str = '-filter:replies'):

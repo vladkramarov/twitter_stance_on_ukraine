@@ -1,12 +1,10 @@
 import pandas as pd
-from transformers import DistilBertTokenizer
 import src.preprocessor.preprocessor_funcs as pf
 import tensorflow as tf
-from tensorflow.keras.optimizers.legacy import Adam
 import numpy as np
-from sklearn.metrics import f1_score, confusion_matrix
+from sklearn.metrics import f1_score
 import src.core as core
-from transformers import TFDistilBertModel, DistilBertConfig
+from transformers import TFDistilBertModel
 from typing import Callable, List
 from sklearn.metrics import f1_score
 from tensorflow.keras.models import load_model

@@ -11,6 +11,7 @@ def preprocess_pipeline(dataset: pd.DataFrame, text_feature: str = pf.TEXT_COLUM
     return dataset, input_ids, attention_mask
 
 def prepare_training_data(dataset: pd.DataFrame, label_feature: str = pf.LABEL_COLUMN):
+    
     dataset, input_ids, attention_mask = preprocess_pipeline(dataset)
     one_hot_encoded_labels = keras.utils.to_categorical(dataset[label_feature])
     return input_ids, attention_mask, one_hot_encoded_labels

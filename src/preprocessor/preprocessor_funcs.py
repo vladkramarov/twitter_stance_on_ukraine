@@ -1,6 +1,5 @@
 import pandas as pd
 import re
-import configparser
 import numpy as np
 from transformers import DistilBertTokenizer
 import src.core as core

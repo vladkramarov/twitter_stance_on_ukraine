@@ -1,16 +1,18 @@
-from dash import dcc, Dash, html
-from typing import Callable, Dict, List
+from dash import dcc, html
+from typing import Callable
 import src.deployment.plotly_chart_components as pcc
-import src.deployment.generate_chart_data as gcd
-import dash_bootstrap_components as dbc
 import datetime
 
 EXTERNAL_STYLESHEETS = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
 Y_AXIS_LABELS = {'daily_ratios': 'Daily Stance Ratio', 'cumulative_ratios': 'Cumulative Stance Ratio'}
+
 CARD_BACKGROUND_COLORS = {'positive': 'limegreen', 'negative': 'crimson', 'neutral': 'steelblue'}
+
 DROPDOWN_OPTIONS = [{'label': 'Likes', 'value': 'avg_likes_per_post'},
                     {'label': 'Impressions', 'value': 'avg_impressions_per_post'},
                     {'label': 'Retweets', 'value': 'avg_retweets_per_post'}]
+
 RIDGE_TITLE_OPTION = {'avg_likes_per_post': 'Likes', 'avg_impressions_per_post': 'Impressions','avg_retweets_per_post': 'Retweets'}
 
 def create_description_card(chart_data):

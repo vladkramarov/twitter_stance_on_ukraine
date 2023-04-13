@@ -1,10 +1,6 @@
 import pandas as pd
-import importlib.util
 import plotly.express as px
 import plotly.graph_objects as go
-import src.core as core
-import importlib
-importlib.reload(core)
 
 color_map = {
         'positive': 'rgb(5, 200, 50)',
@@ -41,7 +37,7 @@ def render_full_plotly_chart(chart_data, y_axis = 'daily_ratios'):
 def ridge_plot(chart_data, metric_to_display='avg_likes_per_post', metric_label='Likes'):
     fig = go.Figure()
     for i in color_map:
-        fig.add_trace(go.Violin(x=chart_data.loc[chart_data['label']==i][metric_to_display], line_color=color_map[i], name=f'{i.capitalize()}',hovertemplate='Median: %{y:.2f}<extra></extra>'))
+        fig.add_trace(go.Violin(x=chart_data.loc[chart_data['label']==i][metric_to_display], line_color=color_map[i], name=f'{i.capitalize()}'))
 
     fig.update_traces(orientation='h', side='positive', width=3, points=False)
     fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)

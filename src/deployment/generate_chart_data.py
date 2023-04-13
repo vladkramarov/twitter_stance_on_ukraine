@@ -1,7 +1,5 @@
 import pandas as pd
-import src.database_manager as dm
 import src.core as core
-import datetime
 
 def build_the_query(filter_keyword: str = '', table_name: str = core.TABLE_NAME, query_start_date: str = '2023-02-01') -> str:
     '''Builds a PostgreSQL query to obtain data for the cumulative and daily tweet ratios. Allows to select the table name and a filter keyword/phrase'''

@@ -9,6 +9,7 @@
 ## 2. Training Data
 - Data for training, validating, and testing is located in the [dataset](dataset) folder
 - Code for collecting and labeling training data can be found in [training_data_obtainer](src/training_data_obtainer.py)
+    - Note that snscraper library stopped working on Macs, so Google Colab was used to scrape the tweets
 - Tweets were collected using the following 3 methods:
 - Search by user:
     - E.g. since Donald Trump Junior only critisizes all the help given to Ukraine, his tweets that mention Ukraine are automatically labeled as negative
@@ -20,14 +21,17 @@
 - Search by hashtags:
     - Similar to a keyword search. Used hashtags that would most likely end up in a strongly positive/strongly negative tweet.
 - Train data size ~33,000 tweets, validation and test data are ~11,000 tweets each
+
 ## 3. Preprocessing
 - All the text preprocessing functions can be found in [preprocessor_funcs](src/preprocessor/preprocessor_funcs.py) module
 - Preprocessing pipelines can be found in [preprocessor_pipelines](src/preprocessor/preprocessor_pipelines.py) module
 
 ## 4. Training a Model
 - To define a model, use [model_compiler](src/training/model_compiler.py)
+    - DistilBert Transformer with a shallow neural nets were trained and evaluated
 - To train a model, use [train_module](src/training/train_module.py)
     - Separate classes are used to train and evaluate the models shown in [class_train](src/training/class_train.py)
+    - To train the latest model, run [train_module](src/training/train_module.py) module
     - Validation and test results for each model are automatically logged to the [logs](models/logs) folder
     - Results for all models can be viewed via Tensorboard
 

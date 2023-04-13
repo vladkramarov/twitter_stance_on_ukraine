@@ -36,7 +36,6 @@ def delete_db(table_name: str, connector_func: Callable = connect_to_db) -> None
     cursor.close()
     conn.close()
 
-
 def write_to_db(dataset_with_labels: pd.DataFrame, table_name: str = core.TABLE_NAME, connector_func: Callable = connect_to_db) -> None:
     '''Writes a Pandas DataFrame to a PostreSQL table with the specified name'''
     conn, cursor = connector_func()

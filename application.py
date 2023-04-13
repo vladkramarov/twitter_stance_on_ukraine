@@ -4,7 +4,7 @@ import dash
 from dash import dependencies
 import src.deployment.generate_chart_data as gcd
 import src.deployment.plotly_chart_components as pcc
-from datetime import datetime, timedelta, date
+from datetime import date
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 application = app.server
@@ -40,6 +40,7 @@ def update_main_chart(date_value, input_value_1, keyword_value):
     dependencies.Output('ridge_plot', 'figure'),
     dependencies.Input('dropdown', 'value'))
 def update_ridge_plots(dropdown_input):
+    '''Callback to select a metric shown on the Ridge plot'''
     chart_data = gcd.generate_chart_data(conn)
     return pcc.ridge_plot(chart_data, dropdown_input, dc.RIDGE_TITLE_OPTION[dropdown_input])
 
