@@ -50,7 +50,6 @@ In this project, Twitter's stance towards the war in Ukraine is determined using
 - The actual app is deployed on Elastic Beanstalk. AWS Codepipeline is used for CI/CD. The code to the app is in [application](application.py); the actual app can be found [here](http://twitterukraine-env.eba-ybme3mms.us-east-1.elasticbeanstalk.com/)
 
 
-
-
-
+## 7. Issues
+- Very high latency, when updating the main chart. Every callback queries new dataset from the DB, and it is slow. Please be patient for now :)
 

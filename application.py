@@ -21,6 +21,7 @@ app.layout = dc.create_layout(chart_data)
         dependencies.Input('radio_buttons', 'value'),
          dependencies.Input('keyword_input', 'value')])
 def update_main_chart(date_value, radio_button_input, keyword_value):
+    '''Update the main chart based on the input values'''
     if date_value:
         start_date = date.fromisoformat(date_value).strftime('%Y-%m-%d')
         chart_data = gcd.generate_chart_data(conn, filter_keyword = keyword_value, query_start_date=start_date)
