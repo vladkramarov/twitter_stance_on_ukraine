@@ -18,7 +18,7 @@ app.layout = dc.create_layout(gcd.generate_chart_data(conn))
         [dependencies.Input('date_picker_single', 'date'),
         dependencies.Input('radio_buttons', 'value'),
          dependencies.Input('keyword_input', 'value')])
-def update_chart(date_value, input_value_1, keyword_value):
+def update_main_chart(date_value, input_value_1, keyword_value):
     if date_value:
         start_date = date.fromisoformat(date_value).strftime('%Y-%m-%d')
         chart_data = gcd.generate_chart_data(conn, filter_keyword = keyword_value, query_start_date=start_date)
@@ -32,10 +32,16 @@ def update_chart(date_value, input_value_1, keyword_value):
     else:
         chart_data = gcd.generate_chart_data(conn, filter_keyword=keyword_value)
         plotly_figure = pcc.render_full_plotly_chart(chart_data, input_value_1)
-        # dc.create_card(chart_data)
     plotly_figure.update_yaxes(title=dc.Y_AXIS_LABELS[input_value_1])
     
     return plotly_figure
+
+@app.callback(
+    dependencies.Output('ridge_plot', 'figure'),
+    dependencies.Input('dropdown', 'value'))
+def update_ridge_plots(dropdown_input):
+    chart_data = gcd.generate_chart_data(conn)
+    return pcc.ridge_plot(chart_data, dropdown_input, dc.RIDGE_TITLE_OPTION[dropdown_input])
 
 if __name__ == '__main__':
     application.run(debug=True, port=8080)
