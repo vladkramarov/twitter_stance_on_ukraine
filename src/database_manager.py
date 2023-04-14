@@ -59,3 +59,4 @@ def check_tweets_per_day(table_name: str = core.TABLE_NAME, connector_func: Call
     return cursor.fetchall()
 
 
+check_tweets_per_day()
