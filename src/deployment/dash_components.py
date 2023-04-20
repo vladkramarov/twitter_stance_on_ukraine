@@ -13,7 +13,7 @@ DROPDOWN_OPTIONS = [{'label': 'Likes', 'value': 'avg_likes_per_post'},
                     {'label': 'Impressions', 'value': 'avg_impressions_per_post'},
                     {'label': 'Retweets', 'value': 'avg_retweets_per_post'}]
 
-RIDGE_TITLE_OPTION = {'avg_likes_per_post': 'Likes', 'avg_impressions_per_post': 'Impressions','avg_retweets_per_post': 'Retweets'}
+RIDGE_TITLE_OPTIONS = {'avg_likes_per_post': 'Likes', 'avg_impressions_per_post': 'Impressions','avg_retweets_per_post': 'Retweets'}
 
 def create_description_card(chart_data):
     """ """

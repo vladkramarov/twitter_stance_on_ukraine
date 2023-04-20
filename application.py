@@ -44,7 +44,7 @@ def update_main_chart(date_value, radio_button_input, keyword_value):
     dependencies.Input('dropdown', 'value'))
 def update_ridge_plots(dropdown_input):
     '''Callback to select a metric shown on the Ridge plot'''
-    return pcc.ridge_plot(ridge_chart_data, dropdown_input, dc.RIDGE_TITLE_OPTION[dropdown_input])
+    return pcc.ridge_plot(ridge_chart_data, dropdown_input, dc.RIDGE_TITLE_OPTIONS[dropdown_input])
 
 if __name__ == '__main__':
     application.run(debug=True, port=8080)
