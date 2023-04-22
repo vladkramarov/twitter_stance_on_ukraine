@@ -25,7 +25,7 @@ def daily_tweets_classification_pipeline(hours_start, hours_end):
                 2. Obtains daily tweets
                 3. Preprocesses them
                 4. Classifies them
-                5. Writes them to the db'''
+                5. Writes them to the database'''
     
     connector = dto.TweepyConnector()
     daily_tweets = dto.obtain_daily_tweets(hours_start, hours_end,connector)
