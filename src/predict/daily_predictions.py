@@ -33,6 +33,6 @@ def daily_tweets_classification_pipeline(hours_start, hours_end):
     new_tweets_with_labels = classify_daily_tweets(new_tweets, input_ids, attention_masks)
     dm.write_to_db(new_tweets_with_labels)
 
-daily_tweets_classification_pipeline(24, 12)
+
 
 
