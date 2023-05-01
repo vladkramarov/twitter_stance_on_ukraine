@@ -46,3 +46,8 @@ def generate_chart_data(
     data["label"] = data["label"].replace(values_to_replace_labels)
 
     return data
+
+
+conn, cursor = dm.connect_to_db()
+data = generate_chart_data(conn)
+data.head()

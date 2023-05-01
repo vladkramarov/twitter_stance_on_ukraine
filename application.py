@@ -13,9 +13,7 @@ app.title = "Twitter's Stance on Ukraine"
 
 conn, cursor = dm.connect_to_db()
 chart_data = gcd.generate_chart_data(conn)
-ridge_chart_data = chart_data.iloc[
-    :, :5
-]  # stored dataset just for the ridge chart, since it does not need to retrieve any additional information from the database. runs much faster
+ridge_chart_data = chart_data.iloc[:, :5]  # stored dataset just for the ridge chart, since it does not need to retrieve any additional information from the database. runs much faster
 app.layout = dc.create_layout(chart_data)
 
 
@@ -57,9 +55,7 @@ def update_main_chart(date_value, radio_button_input, keyword_value):
 )
 def update_ridge_plots(dropdown_input):
     """Callback to select a metric shown on the Ridge plot"""
-    return pcc.ridge_plot(
-        ridge_chart_data, dropdown_input, dc.RIDGE_TITLE_OPTIONS[dropdown_input]
-    )
+    return pcc.ridge_plot(ridge_chart_data, dropdown_input, dc.RIDGE_TITLE_OPTIONS[dropdown_input])
 
 
 if __name__ == "__main__":
