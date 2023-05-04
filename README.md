@@ -2,8 +2,8 @@
 
 ## Overview
 In this project, Twitter's stance towards the war in Ukraine is determined using Distlbert transformer with a shallow NN.
-- Approximately 10K tweets that mention Ukraine are classified daily
-- Aggregated results are shown in a Dash app, deployed on Elastic Beanstalk
+- Approximately 10K tweets that mention Ukraine are classified daily.
+- Aggregated results are shown in a Dash app, deployed on Elastic Beanstalk.
 
 
 ## 1. Running the code
