@@ -85,4 +85,3 @@ def check_tweets_per_day(
     cursor.execute(query)
     return cursor.fetchall()
 
-
