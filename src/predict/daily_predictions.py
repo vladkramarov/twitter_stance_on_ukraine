@@ -39,4 +39,4 @@ def daily_tweets_classification_pipeline(hours_start, hours_end):
     dm.write_to_db(new_tweets_with_labels)
 
 if __name__ == "__main__":
-    daily_tweets_classification_pipeline(24, 0)
+    daily_tweets_classification_pipeline(24, 12)
