@@ -1,7 +1,7 @@
 # twitter_stance_on_ukraine
 
 ## Overview
-In this project, Twitter's stance towards the war in Ukraine is determined using Distlbert transformer with a shallow NN.
+In this project, Twitter's stance towards the war in Ukraine is determined using DistilBert transformer with a shallow classification head.
 - Between 5 and 10K tweets that mention Ukraine are classified daily.
 - Aggregated results are shown in a Dash app, deployed on Elastic Beanstalk.
 
